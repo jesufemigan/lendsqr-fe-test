@@ -1,0 +1,35 @@
+@use "../globals/colors" as c;
+@use "../utils/" as u;
+
+.container {
+  background-color: #fff;
+  max-height: 100vh;
+
+  & > div {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+
+.logo > img {
+  margin-top: u.em(50);
+  margin-bottom: u.em(100);
+}
+
+.welcomeImg {
+  @include u.breakpoint-down(medium) {
+    text-align: center;
+    & > img {
+      width: u.em(350);
+    }
+  }
+}
+
+@media only screen and (min-width: u.em(900)) and (max-width: u.em(1140)) {
+  .welcomeImg {
+    & > img {
+      width: u.em(500);
+      text-align: center;
+    }
+  }
+}

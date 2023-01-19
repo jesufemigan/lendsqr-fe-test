@@ -1,0 +1,94 @@
+@use "../utils/" as u;
+@use "../globals/colors" as c;
+
+.container {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: white;
+  padding-top: u.em(180);
+  padding-left: u.em(60);
+  padding-right: u.em(80);
+
+  box-shadow: 0px 15px 90px rgba(0, 0, 0, 0.03);
+  height: 100%;
+  width: 45%;
+
+  @include u.breakpoint-down(medium) {
+    position: static;
+    width: auto;
+    padding: u.em(70) u.em(30);
+  }
+
+  font-family: var(--avenirNext-font);
+
+  h1 {
+    color: c.$primary-text;
+    font-weight: 700;
+    margin-bottom: u.em(2);
+  }
+
+  .text {
+    color: c.$secondary-text;
+    margin-bottom: u.em(40);
+  }
+
+  input {
+    border: 2px solid rgba(84, 95, 125, 0.15);
+    border-radius: 5px;
+    color: c.$secondary-text;
+    padding: u.em(16);
+    width: 100%;
+
+    &:focus {
+      outline: 1px solid c.$primary-text;
+    }
+
+    &:nth-of-type(1) {
+      margin-bottom: u.em(24);
+    }
+  }
+
+  input::placeholder {
+    color: inherit;
+    opacity: 0.6;
+  }
+}
+
+.password {
+  position: relative;
+
+  & > p {
+    position: absolute;
+    top: 26%;
+    right: 5%;
+    text-transform: uppercase;
+    color: c.$button-bg;
+    font-size: u.em(12);
+    cursor: pointer;
+  }
+}
+
+.forget {
+  text-transform: uppercase;
+  color: c.$button-bg;
+  font-size: u.em(12);
+  margin-bottom: u.em(30);
+  cursor: pointer;
+}
+
+.container button {
+  width: 100%;
+  background-color: c.$button-bg;
+  border-radius: 5px;
+  border: none;
+  padding: u.em(15) 0;
+  text-transform: uppercase;
+  color: white;
+  font-size: u.em(14);
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}

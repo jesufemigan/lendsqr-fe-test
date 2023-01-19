@@ -6,11 +6,6 @@ const workSans = Work_Sans({
   variable: "--workSans-font",
 });
 
-const avenirNext = localFont({
-  src: "../public/font/AvenirNextLTPro-Regular.otf",
-  variable: "--avenirNext-font",
-});
-
 export default function Home() {
   return (
     <>
