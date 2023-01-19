@@ -1,0 +1,53 @@
+@use "../globals/colors" as c;
+@use "../utils/" as u;
+
+.container {
+  background-color: #fff;
+  width: u.em(283);
+  height: calc(100% - u.em(90));
+  position: fixed;
+  top: u.em(90);
+  z-index: -1;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  font-size: u.em(16);
+  padding: u.em(39) 0;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.04);
+
+  @include u.breakpoint-down(medium) {
+    transform: translateX(u.em(-290));
+    top: u.em(79);
+
+    &.showSidebar {
+      transform: translateX(0);
+    }
+  }
+  transition: all 0.2s;
+}
+
+.switch {
+  display: flex;
+  align-items: center;
+  gap: u.em(5);
+  margin-bottom: u.em(52);
+}
+
+.dashboardLinkContainer {
+  margin-top: u.em(40);
+  display: flex;
+  flex-direction: column;
+  gap: u.em(40);
+
+  .heading {
+    font-size: u.em(12);
+    text-transform: uppercase;
+    margin-bottom: u.em(20);
+    padding-left: u.em(30);
+  }
+
+  .allLinks {
+    display: flex;
+    flex-direction: column;
+    gap: u.em(30);
+  }
+}

@@ -1,0 +1,129 @@
+@use "../globals/colors" as c;
+@use "../utils/" as u;
+
+.header {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+  align-items: center;
+  padding: u.em(20) u.em(30);
+  box-shadow: 3px 0px 20px rgba(0, 0, 0, 0.04);
+  @include u.breakpoint-down(medium) {
+    padding: u.em(20);
+    gap: u.em(10);
+
+    & > img {
+      width: u.em(80);
+    }
+  }
+}
+
+.search {
+  position: relative;
+  flex: 0.8;
+  margin-left: u.em(100);
+
+  input {
+    padding: u.em(12) u.em(20);
+    border: 1px solid c.$secondary-text;
+    border-radius: u.em(8);
+    width: 100%;
+
+    &::placeholder {
+      font-size: u.em(14);
+      opacity: 0.7;
+      color: c.$primary-text;
+    }
+
+    &:focus {
+      outline: none;
+      border: 1.2px solid c.$secondary-text;
+    }
+  }
+  span {
+    background-color: c.$button-bg;
+    position: absolute;
+    right: -1px;
+    top: 0;
+    display: flex;
+    align-items: center;
+    padding: 0 u.em(20);
+    height: 100%;
+    border-radius: 0 8px 8px 0;
+
+    img {
+      width: u.em(14);
+      height: u.em(14);
+    }
+  }
+  @include u.breakpoint-down(medium) {
+    margin-left: u.em(0);
+    flex: 1;
+
+    input {
+      padding: u.em(10);
+    }
+
+    span {
+      padding: 0 u.em(10);
+    }
+  }
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: u.em(40);
+  color: c.$secondary-text;
+
+  & > p {
+    text-decoration: underline;
+  }
+  @include u.breakpoint-down(medium) {
+    gap: u.em(10);
+    & > p {
+      display: none;
+    }
+
+    & > img {
+      width: u.em(15);
+    }
+  }
+
+  & > span {
+    display: flex;
+    align-items: center;
+    gap: u.em(8);
+
+    img {
+      border-radius: 50%;
+      width: u.em(48);
+
+      @include u.breakpoint-down(medium) {
+        width: u.em(35);
+        height: u.em(40);
+      }
+    }
+
+    span {
+      display: flex;
+      align-items: center;
+      img {
+        padding-right: u.em(20);
+      }
+
+      @include u.breakpoint-down(medium) {
+        & > p {
+          display: none;
+        }
+
+        img {
+          padding: 0;
+          width: u.em(10);
+        }
+      }
+    }
+  }
+}

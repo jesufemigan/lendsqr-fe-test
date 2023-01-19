@@ -1,0 +1,45 @@
+@use "../utils/" as u;
+@use "../globals/colors" as c;
+
+.normal {
+  display: flex;
+  align-items: center;
+  gap: u.em(15);
+  padding-left: u.em(30);
+  cursor: pointer;
+
+  p {
+    color: c.$secondary-text;
+    font-size: u.em(16);
+  }
+  img {
+    width: u.em(16);
+  }
+}
+
+.dashboardLink {
+  position: relative;
+
+  .active,
+  &:hover {
+    &::before {
+      content: "";
+      width: 100%;
+      transform: translateX(u.em(-30));
+      height: u.em(40);
+      position: absolute;
+      background-color: c.$button-bg;
+      opacity: 0.06;
+      border-left: 2px solid c.$button-bg;
+    }
+
+    &::after {
+      content: "";
+      height: u.em(40);
+      position: absolute;
+      left: 0;
+      width: 3px;
+      background-color: c.$button-bg;
+    }
+  }
+}

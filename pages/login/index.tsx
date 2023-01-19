@@ -6,6 +6,7 @@ import welcomeImage from "../../public/assets/welcome-img.svg";
 import styles from "../../styles/pages/Login.module.scss";
 
 import localFont from "@next/font/local";
+import HeadData from "../../components/Head";
 
 const avenirNext = localFont({
   src: [
@@ -23,17 +24,20 @@ const avenirNext = localFont({
 
 function index() {
   return (
-    <div className={`${styles.container} ${avenirNext.variable}`}>
-      <div>
-        <span className={styles.logo}>
-          <Image src={logo} alt="logo" />
-        </span>
-        <div className={styles.welcomeImg}>
-          <Image src={welcomeImage} alt="welcome" />
+    <>
+      <HeadData />
+      <div className={`${styles.container} ${avenirNext.variable}`}>
+        <div>
+          <span className={styles.logo}>
+            <Image src={logo} alt="logo" />
+          </span>
+          <div className={styles.welcomeImg}>
+            <Image src={welcomeImage} alt="welcome" />
+          </div>
+          <LoginForm />
         </div>
-        <LoginForm />
       </div>
-    </div>
+    </>
   );
 }
 export default index;

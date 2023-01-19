@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useState } from "react";
 import styles from "../../styles/components/LoginForm.module.scss";
 
@@ -20,7 +21,9 @@ function LoginForm() {
       </span>
       <p className={styles.forget}>Forgot Password?</p>
 
-      <button type="submit">Log in</button>
+      <button type="submit">
+        <Link href="/">Log in</Link>
+      </button>
     </form>
   );
 }
