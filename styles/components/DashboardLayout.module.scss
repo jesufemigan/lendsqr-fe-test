@@ -4,14 +4,20 @@
 .pageContent {
   position: fixed;
   background-color: c.$primary-bg;
-  width: 100%;
+  width: calc(100% - u.em(283));
   height: 100%;
   z-index: -2;
   top: u.em(90);
   left: u.em(283);
+  padding: 0 u.em(60);
+  padding-top: u.em(60);
+
+  overflow-y: scroll;
 
   @include u.breakpoint-down(medium) {
     top: u.em(79);
     left: 0;
+    padding: 0 u.em(30);
+    width: 100%;
   }
 }

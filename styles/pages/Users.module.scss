@@ -1,0 +1,17 @@
+@use "../globals/colors" as c;
+@use "../utils/" as u;
+
+.heading {
+  font-size: u.em(24);
+  color: c.$primary-text;
+  margin-bottom: u.em(20);
+}
+
+.cardHeading {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: u.em(26);
+
+  margin-bottom: u.em(30);
+}

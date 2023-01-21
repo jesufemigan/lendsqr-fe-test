@@ -1,0 +1,68 @@
+@use "../globals/colors" as c;
+@use "../utils/" as u;
+
+.title {
+  display: flex;
+  width: 100%;
+  & > span {
+    display: flex;
+    align-items: center;
+
+    img {
+      width: u.em(16);
+    }
+  }
+}
+
+.wrapper {
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid rgba(33, 63, 125, 0.06);
+  box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+  border-radius: u.em(4);
+  padding: u.em(30);
+
+  color: c.$primary-text;
+  overflow-x: scroll;
+}
+
+.table {
+  display: table;
+  width: 100%;
+
+  & > div:last-child {
+    &::after {
+      display: none !important;
+    }
+  }
+}
+
+.row {
+  display: table-row;
+
+  div {
+    display: table-cell;
+
+    span {
+      display: flex;
+      align-items: center;
+      gap: u.em(5);
+
+      p {
+        text-transform: uppercase;
+        font-size: u.em(12);
+        font-weight: 600;
+      }
+
+      img {
+        width: u.em(16);
+        height: u.em(10);
+      }
+    }
+  }
+}
+
+.filterMenu {
+  position: absolute;
+  left: 0;
+}
