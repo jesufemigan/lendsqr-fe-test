@@ -7,6 +7,7 @@ import userSavingsIcon from "../../public/assets/icons/user-saving.svg";
 
 import style from "../../styles/pages/Users.module.scss";
 import UsersTable from "../../components/UsersTable/UsersTable";
+import Pagination from "../../components/Pagination/Pagination";
 
 const index = () => {
   return (
@@ -41,6 +42,7 @@ const index = () => {
       </div>
 
       <UsersTable />
+      <Pagination />
     </div>
   );
 };

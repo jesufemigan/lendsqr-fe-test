@@ -1,0 +1,51 @@
+@use "../globals/colors" as c;
+@use "../utils/" as u;
+
+.container {
+  margin-top: u.em(30);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @include u.breakpoint-down(medium) {
+    flex-direction: column;
+  }
+}
+
+.showing {
+  display: flex;
+  align-items: center;
+  gap: u.em(5);
+
+  select {
+    padding: u.em(7) u.em(12);
+    border: none;
+    background-color: rgba(33, 63, 125, 0.1);
+    border-radius: 4px;
+    color: c.$primary-text;
+    font-size: u.em(14);
+    font-weight: 500;
+  }
+
+  p {
+    color: c.$secondary-text;
+    font-size: u.em(14);
+  }
+}
+
+.pagesCta {
+  display: flex;
+  align-items: center;
+  gap: u.em(10);
+  color: rgba(84, 95, 125, 0.6);
+
+  .arrowBtn {
+    background-color: rgba(33, 63, 125, 0.1);
+    padding: u.em(4) u.em(8);
+    border-radius: 4px;
+  }
+}
+
+.number {
+  cursor: pointer;
+}
