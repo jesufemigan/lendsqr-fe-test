@@ -5,6 +5,8 @@ import style from "../../styles/components/UsersTable.module.scss";
 import FilterMenu from "../FilterMenu/FilterMenu";
 import UserRowDetails from "../UserRowDetails/UserRowDetails";
 
+import { convertTime, checkStatus } from "../../utils/dateTime";
+
 import { useMemo, useState } from "react";
 
 const UsersTable = ({ users }: { users: any[] }) => {
@@ -83,12 +85,13 @@ const UsersTable = ({ users }: { users: any[] }) => {
           {users.map((user) => (
             <UserRowDetails
               key={user.id}
+              id={user.id}
               organizationName={user.orgName}
               fullName={user.profile.firstName + " " + user.profile.lastName}
               emailAddress={user.email}
-              phoneNumber={user.phoneNumber.slice(7, -1)}
-              dateJoined={"20th"}
-              status={"active"}
+              phoneNumber={user.phoneNumber.substring(0, 14)}
+              dateJoined={convertTime(user.createdAt)}
+              status={checkStatus(user.lastActiveDate)}
             />
           ))}
         </>

@@ -27,6 +27,7 @@ const index = () => {
     const firstPageIndex = (currentPage - 1) * pageSize;
     const lastPageIndex = firstPageIndex + pageSize;
     return users.slice(firstPageIndex, lastPageIndex);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, users]);
 
   return (

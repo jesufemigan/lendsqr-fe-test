@@ -79,9 +79,6 @@ const Pagination: React.FC<IPagination> = ({
             </span>
           );
         })}
-        {/* <div>
-
-        </div> */}
 
         <div
           className={`${style.arrowBtn} ${

@@ -5,6 +5,7 @@ import blacklistIcon from "../../public/assets/icons/blacklistUser.svg";
 import activateIcon from "../../public/assets/icons/activateUser.svg";
 
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 import style from "../../styles/components/UserRowDetails.module.scss";
 import { useHandleOutsideClick } from "../../hooks/handleOutsideClick";
@@ -16,6 +17,7 @@ interface IUserRowDetails {
   phoneNumber: string;
   dateJoined: string;
   status: string;
+  id: number;
 }
 
 const UserRowDetails: React.FC<IUserRowDetails> = ({
@@ -25,14 +27,22 @@ const UserRowDetails: React.FC<IUserRowDetails> = ({
   phoneNumber,
   dateJoined,
   status,
+  id,
 }) => {
   const [showDetails, setShowDetails] = useState(false);
   const closeMoreDetailsDropDown = () => {
     setShowDetails(false);
   };
   const ref = useHandleOutsideClick(closeMoreDetailsDropDown);
+
+  const router = useRouter();
   return (
-    <div className={style.row}>
+    <div
+      className={style.row}
+      onClick={() => {
+        router.push(`/users/${id}`);
+      }}
+    >
       <p>{organizationName}</p>
       <p>{fullName}</p>
       <p>{emailAddress}</p>
@@ -46,6 +56,8 @@ const UserRowDetails: React.FC<IUserRowDetails> = ({
               ? style.active
               : status === "pending"
               ? style.pending
+              : status === "inactive"
+              ? style.inactive
               : style.blacklisted
           }
         >

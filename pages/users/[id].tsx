@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 import backIcon from "../../public/assets/icons/goBack.svg";
 import ratedIcon from "../../public/assets/icons/rated.svg";
@@ -9,10 +10,125 @@ import userPhoto from "../../public/assets/icons/mockUserPhoto.svg";
 import style from "../../styles/pages/UserDetails.module.scss";
 import UserInfoCard from "../../components/UserInfoCard/UserInfoCard";
 import Link from "next/link";
+import { generateRandomCharacters } from "../../utils/idGenerator";
 
 const ShowUser = () => {
   const router = useRouter();
   const { id } = router.query;
+  const [userDetails, setUserDetails] = useState<{ [key: string]: any }>({});
+
+  const fetchUserDetails = async () => {
+    const response = await fetch(
+      `https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users/${id}`
+    );
+    const data = response.json();
+
+    localStorage.setItem("userDetails", JSON.stringify(data));
+    setUserDetails(data);
+  };
+
+  useEffect(() => {
+    const data = localStorage.getItem("userDetails");
+
+    if (data) {
+      setUserDetails(JSON.parse(data));
+    } else {
+      fetchUserDetails();
+    }
+  }, []);
+
+  function isEmptyObject(obj: any) {
+    return JSON.stringify(obj) === "{}";
+  }
+
+  const personalInformation = [
+    {
+      title: "Full Name",
+      info: userDetails.profile.firstName + " " + userDetails.profile.lastName,
+    },
+    {
+      title: "Phone Number",
+      info: userDetails.profile.phoneNumber,
+    },
+    {
+      title: "Email Address",
+      info: userDetails.email,
+    },
+    {
+      title: "BVN",
+      info: userDetails.profile.bvn,
+    },
+    {
+      title: "Gender",
+      info: userDetails.profile.gender,
+    },
+  ];
+
+  const educationInformation = [
+    {
+      title: "Level of Education",
+      info: userDetails.education.level,
+    },
+    {
+      title: "Employment Status",
+      info: userDetails.education.employmentStatus,
+    },
+    {
+      title: "Sector of Employment",
+      info: userDetails.education.sector,
+    },
+    {
+      title: "Duration of Employment",
+      info: userDetails.education.duration,
+    },
+    {
+      title: "Office Email",
+      info: userDetails.education.officeEmail,
+    },
+    {
+      title: "Monthly Income",
+      info: `&#8358;${userDetails.education.monthlyIncome[1]} - &#8358;${userDetails.education.monthlyIncome[0]}`,
+    },
+    {
+      title: "Loan Repayment",
+      info: userDetails.education.loanRepayment,
+    },
+  ];
+
+  const socialInformation = [
+    {
+      title: "Twitter",
+      info: userDetails.socials.twitter,
+    },
+    {
+      title: "Facebook",
+      info: userDetails.socials.facebook,
+    },
+    {
+      title: "Instagram",
+      info: userDetails.socials.instagram,
+    },
+  ];
+
+  const guarantorInformation = [
+    {
+      title: "Full Name",
+      info:
+        userDetails.guarantor.firstName + " " + userDetails.guarantor.lastName,
+    },
+    {
+      title: "Phone Number",
+      info: userDetails.guarantor.phoneNumber,
+    },
+    {
+      title: "Address",
+      info: userDetails.guarantor.address,
+    },
+  ];
+
+  if (!isEmptyObject(userDetails)) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
@@ -35,11 +151,15 @@ const ShowUser = () => {
         <div className={style.userProfileSection}>
           <span className={style.userPhoto}>
             <div className={style.display}>
-              <Image src={userPhoto} alt="user" />
+              <Image src={userDetails.profile.avatar} alt="user" />
             </div>
             <div className={style.name}>
-              <h1>Grace Effiom</h1>
-              <p>LSQFf5hgyi</p>
+              <h1>
+                {userDetails.profile.firstName +
+                  " " +
+                  userDetails.profile.lastName}
+              </h1>
+              <p>{generateRandomCharacters()}</p>
             </div>
           </span>
           <span className={style.userTier}>
@@ -51,8 +171,8 @@ const ShowUser = () => {
             </span>
           </span>
           <span className={style.userAccount}>
-            <h1>&#8358; 200,000.00</h1>
-            <p>99329133322/Providus Bank</p>
+            <h1>&#8358; {userDetails.accountBalance}</h1>
+            <p>{userDetails.accountNumber}/Providus Bank</p>
           </span>
         </div>
         <div className={style.userLinks}>
@@ -68,73 +188,16 @@ const ShowUser = () => {
       <div className={style.userInfoContainer}>
         <UserInfoCard
           heading="Personal Information"
-          userDetailsArray={[
-            {
-              title: "Full Name",
-              info: "Grace Effon",
-            },
-            {
-              title: "Phone Number",
-              info: "07060780922",
-            },
-            {
-              title: "Email Address",
-              info: "grace@gmail.com",
-            },
-            {
-              title: "BVN",
-              info: "0702939499932",
-            },
-            {
-              title: "Gender",
-              info: "Female",
-            },
-            {
-              title: "Marital Status",
-              info: "Single",
-            },
-          ]}
+          userDetailsArray={personalInformation}
         />
         <UserInfoCard
-          heading="Personal Information"
-          userDetailsArray={[
-            {
-              title: "Full Name",
-              info: "Grace Effon",
-            },
-            {
-              title: "Phone Number",
-              info: "07060780922",
-            },
-            {
-              title: "Email Address",
-              info: "grace@gmail.com",
-            },
-            {
-              title: "BVN",
-              info: "0702939499932",
-            },
-            {
-              title: "Gender",
-              info: "Female",
-            },
-            {
-              title: "Marital Status",
-              info: "Single",
-            },
-            {
-              title: "Children",
-              info: "None",
-            },
-            {
-              title: "type of residence",
-              info: "Parnet residence",
-            },
-            {
-              title: "Hello",
-              info: "sdjsjdjdj",
-            },
-          ]}
+          heading="Education and Employment"
+          userDetailsArray={educationInformation}
+        />
+        <UserInfoCard heading="Social" userDetailsArray={socialInformation} />
+        <UserInfoCard
+          heading="Guarantor"
+          userDetailsArray={guarantorInformation}
         />
       </div>
     </div>
