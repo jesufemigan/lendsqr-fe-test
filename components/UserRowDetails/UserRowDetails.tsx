@@ -12,7 +12,7 @@ import { useHandleOutsideClick } from "../../hooks/handleOutsideClick";
 const UserRowDetails = () => {
   const [showDetails, setShowDetails] = useState(false);
   const closeMoreDetailsDropDown = () => {
-    setShowDetails((prev) => !prev);
+    setShowDetails(false);
   };
   const ref = useHandleOutsideClick(closeMoreDetailsDropDown);
   return (
@@ -28,7 +28,7 @@ const UserRowDetails = () => {
         <Image
           src={moreIcon}
           alt="more"
-          onClick={() => closeMoreDetailsDropDown()}
+          onClick={() => setShowDetails(true)}
           ref={ref}
         />
         <div className={showDetails ? style.moreDetails : style.hideDetails}>

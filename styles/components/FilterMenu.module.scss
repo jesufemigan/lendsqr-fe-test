@@ -1,0 +1,62 @@
+@use "../globals/colors" as c;
+@use "../utils/" as u;
+
+.container {
+  display: flex !important;
+  flex-direction: column;
+  gap: u.em(20);
+  // align-items: center;
+  background-color: #fff;
+  border: 1px solid rgba(84, 95, 125, 0.14);
+  box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+  border-radius: 4px;
+
+  width: u.em(270);
+  height: u.em(600);
+
+  position: absolute;
+  top: u.em(20);
+  left: u.em(90);
+  z-index: 10;
+  padding: 0 u.em(20);
+  padding-top: u.em(52);
+
+  & > div {
+    display: flex !important;
+    flex-direction: column;
+    gap: u.em(6);
+
+    & > input,
+    & > select {
+      border: 1px solid rgba(33, 63, 125, 0.2);
+      padding: u.em(12) u.em(20);
+      border-radius: 8px;
+    }
+  }
+
+  & > span {
+    display: flex;
+    align-items: center;
+    gap: u.em(14);
+    justify-content: stretch;
+
+    button {
+      width: 100%;
+      padding: u.em(12) u.em(30);
+      border-radius: u.em(8);
+      font-weight: 600;
+    }
+  }
+}
+
+.resetBtn {
+  border: 1px solid c.$secondary-text;
+  color: c.$secondary-text;
+  background: transparent;
+}
+
+.filterBtn {
+  border: 1px solid c.$button-bg;
+  color: #fff;
+  background-color: c.$button-bg;
+}

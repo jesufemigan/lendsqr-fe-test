@@ -1,0 +1,36 @@
+@use "../globals/colors" as c;
+@use "../utils/" as u;
+
+.container {
+  padding: u.em(30) 0;
+  h1 {
+    font-size: u.em(16);
+    font-weight: 500;
+    color: c.$primary-text;
+    margin-bottom: u.em(30);
+  }
+
+  .allDetails {
+    display: grid;
+    gap: u.em(30);
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+
+    span {
+      display: flex;
+      flex-direction: column;
+      gap: u.em(8);
+
+      .title {
+        text-transform: uppercase;
+        font-size: u.em(12);
+        color: c.$secondary-text;
+      }
+
+      .info {
+        font-size: u.em(16);
+        color: c.$primary-text;
+        font-weight: 500;
+      }
+    }
+  }
+}

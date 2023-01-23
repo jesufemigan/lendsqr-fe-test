@@ -1,14 +1,14 @@
 import Image from "next/image";
-import style from "../../styles/components/UserDetailsCard.module.scss";
+import style from "../../styles/components/AllUsersDetailsCard.module.scss";
 
-interface IUserDetailsCard {
+interface IAllUserDetailsCard {
   icon: any;
   cardTitle: string;
   value: number;
   bgColor: string;
 }
 
-const UsersDetailsCard: React.FC<IUserDetailsCard> = ({
+const AllUsersDetailsCard: React.FC<IAllUserDetailsCard> = ({
   icon,
   cardTitle,
   value,
@@ -24,4 +24,4 @@ const UsersDetailsCard: React.FC<IUserDetailsCard> = ({
     </div>
   );
 };
-export default UsersDetailsCard;
+export default AllUsersDetailsCard;

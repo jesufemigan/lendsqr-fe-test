@@ -1,0 +1,196 @@
+@use "../globals/colors" as c;
+@use "../utils/" as u;
+
+.back {
+  display: flex;
+  align-items: center;
+  gap: u.em(15);
+  color: c.$secondary-text;
+  margin-bottom: u.em(32);
+
+  @include u.breakpoint-down(medium) {
+    margin-top: u.em(20);
+  }
+}
+
+.ctaHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: u.em(40);
+
+  p {
+    font-size: u.em(24);
+    color: c.$primary-text;
+    font-weight: 500;
+  }
+
+  span {
+    display: flex;
+    align-items: center;
+    gap: u.em(20);
+    button {
+      // width: 100%;
+      background: transparent;
+      padding: u.em(12) u.em(16);
+      border-radius: 8px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .blacklistBtn {
+      border: 1px solid c.$blacklisted;
+      color: c.$blacklisted;
+    }
+
+    .activateBtn {
+      border: 1px solid c.$active;
+      color: c.$active;
+    }
+  }
+
+  @include u.breakpoint-down(medium) {
+    p {
+      font-size: u.em(16);
+    }
+
+    span {
+      gap: u.em(10);
+      button {
+        padding: u.em(5) u.em(10);
+        font-size: u.em(8);
+      }
+    }
+  }
+}
+
+.sectionOne {
+  background-color: #fff;
+  padding-top: u.em(30);
+  padding-left: u.em(30);
+  border-radius: 4px;
+  box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+
+  @include u.breakpoint-down(medium) {
+    overflow-x: scroll;
+  }
+}
+
+.userProfileSection {
+  display: flex;
+  align-items: center;
+  gap: u.em(30);
+  margin-bottom: u.em(40);
+
+  .userPhoto {
+    display: flex;
+    align-items: center;
+    gap: u.em(20);
+
+    .display {
+      background-color: rgba(33, 63, 125, 0.16);
+      width: u.em(100);
+      height: u.em(100);
+      border-radius: 50%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .name {
+      h1 {
+        font-size: u.em(22);
+        font-weight: 500;
+        color: c.$primary-text;
+        margin-bottom: u.em(8);
+      }
+
+      p {
+        color: c.$secondary-text;
+        font-size: u.em(14);
+      }
+    }
+  }
+
+  .userTier {
+    padding: u.em(0) u.em(30);
+    border-left: 1px solid rgba(84, 95, 125, 0.2);
+    border-right: 1px solid rgba(84, 95, 125, 0.2);
+    p {
+      color: c.$secondary-text;
+      margin-bottom: u.em(8);
+    }
+  }
+
+  .userAccount {
+    color: c.$primary-text;
+    h1 {
+      font-size: u.em(22);
+      font-weight: 500;
+      margin-bottom: u.em(8);
+    }
+
+    p {
+      font-size: u.em(12);
+    }
+  }
+
+  @include u.breakpoint-down(medium) {
+    flex-direction: column;
+    align-items: flex-start;
+
+    .userTier {
+      border: none;
+      padding: 0;
+    }
+  }
+}
+
+.userLinks {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  padding: 0 u.em(30);
+  padding-bottom: u.em(10);
+
+  p {
+    position: relative;
+    color: c.$button-bg;
+    padding: 0 u.em(30);
+    &::after {
+      content: "";
+      width: 100%;
+      height: 2px;
+      background-color: c.$button-bg;
+      position: absolute;
+      bottom: u.em(-10);
+      left: 0;
+    }
+  }
+
+  @include u.breakpoint-down(medium) {
+    padding: 0;
+    padding-bottom: u.em(10);
+    p {
+      font-size: u.em(10);
+      padding: 0 u.em(15);
+      &::after {
+        bottom: u.em(0);
+      }
+    }
+  }
+}
+
+.userInfoContainer {
+  background-color: #fff;
+  margin-top: u.em(30);
+  padding: u.em(30);
+  border-radius: 4px;
+  box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(33, 63, 125, 0.06);
+
+  & > div:not(:last-of-type) {
+    border-bottom: 1px solid rgba(33, 63, 125, 0.1);
+  }
+}

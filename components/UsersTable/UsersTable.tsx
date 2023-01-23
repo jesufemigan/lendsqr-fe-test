@@ -5,7 +5,11 @@ import style from "../../styles/components/UsersTable.module.scss";
 import FilterMenu from "../FilterMenu/FilterMenu";
 import UserRowDetails from "../UserRowDetails/UserRowDetails";
 
+import { useState } from "react";
+
 const UsersTable = () => {
+  const [showFilter, setShowFilter] = useState(false);
+
   return (
     <div className={style.wrapper}>
       <div className={style.table}>
@@ -13,42 +17,66 @@ const UsersTable = () => {
           <div>
             <span>
               <p>Organization</p>
-              <Image src={filterIcon} alt="filter" />
+              <Image
+                src={filterIcon}
+                alt="filter"
+                onClick={() => setShowFilter((prev) => !prev)}
+              />
             </span>
           </div>
           <div>
             <span>
               <p>username</p>
-              <Image src={filterIcon} alt="filter" />
+              <Image
+                src={filterIcon}
+                alt="filter"
+                onClick={() => setShowFilter((prev) => !prev)}
+              />
             </span>
           </div>
           <div>
             <span>
               <p>Email</p>
-              <Image src={filterIcon} alt="filter" />
+              <Image
+                src={filterIcon}
+                alt="filter"
+                onClick={() => setShowFilter((prev) => !prev)}
+              />
             </span>
           </div>
           <div>
             <span>
               <p>Phone Number</p>
-              <Image src={filterIcon} alt="filter" />
+              <Image
+                src={filterIcon}
+                alt="filter"
+                onClick={() => setShowFilter((prev) => !prev)}
+              />
             </span>
           </div>
           <div>
             <span>
               <p>Date Joined</p>
-              <Image src={filterIcon} alt="filter" />
+              <Image
+                src={filterIcon}
+                alt="filter"
+                onClick={() => setShowFilter((prev) => !prev)}
+              />
             </span>
           </div>
           <div>
             <span>
               <p>Status</p>
-              <Image src={filterIcon} alt="filter" />
+              <Image
+                src={filterIcon}
+                alt="filter"
+                onClick={() => setShowFilter((prev) => !prev)}
+              />
             </span>
           </div>
-          {/* <div className={style.filterMenu}>
+          <div className={showFilter ? style.filterMenu : style.hideFilter}>
             <FilterMenu />
-          </div> */}
+          </div>
         </div>
 
         <>

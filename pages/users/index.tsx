@@ -1,4 +1,4 @@
-import UsersDetailsCard from "../../components/UsersDetailsCard/UsersDetailsCard";
+import UsersDetailsCard from "../../components/AllUsersDetailsCard/AllUsersDetailsCard";
 
 import usersIcon from "../../public/assets/icons/user-group.svg";
 import userGroupIcon from "../../public/assets/icons/active-users.svg";
