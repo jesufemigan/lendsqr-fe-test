@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import UsersDetailsCard from "../../components/AllUsersDetailsCard/AllUsersDetailsCard";
 
 import usersIcon from "../../public/assets/icons/user-group.svg";
@@ -8,8 +9,26 @@ import userSavingsIcon from "../../public/assets/icons/user-saving.svg";
 import style from "../../styles/pages/Users.module.scss";
 import UsersTable from "../../components/UsersTable/UsersTable";
 import Pagination from "../../components/Pagination/Pagination";
+import { useEffect, useState, useMemo } from "react";
 
 const index = () => {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    fetch("https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users ")
+      .then((res) => res.json())
+      .then((data) => setUsers(data));
+  }, []);
+
+  let pageSize = 10;
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const currentUserData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * pageSize;
+    const lastPageIndex = firstPageIndex + pageSize;
+    return users.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, users]);
+
   return (
     <div className={style.content}>
       <p className={style.heading}>Users</p>
@@ -41,8 +60,14 @@ const index = () => {
         />
       </div>
 
-      <UsersTable />
-      <Pagination />
+      <UsersTable users={currentUserData} />
+      <Pagination
+        currentPage={currentPage}
+        totalCount={users.length}
+        siblingCount={1}
+        pageSize={pageSize}
+        onPageChange={(page: number) => setCurrentPage(page)}
+      />
     </div>
   );
 };

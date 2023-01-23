@@ -49,3 +49,12 @@
 .number {
   cursor: pointer;
 }
+
+.current {
+  font-weight: 700;
+  color: c.$primary-text;
+}
+
+.disable {
+  pointer-events: none;
+}

@@ -5,9 +5,9 @@ import style from "../../styles/components/UsersTable.module.scss";
 import FilterMenu from "../FilterMenu/FilterMenu";
 import UserRowDetails from "../UserRowDetails/UserRowDetails";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
-const UsersTable = () => {
+const UsersTable = ({ users }: { users: any[] }) => {
   const [showFilter, setShowFilter] = useState(false);
 
   return (
@@ -80,11 +80,17 @@ const UsersTable = () => {
         </div>
 
         <>
-          <UserRowDetails />
-          <UserRowDetails />
-          <UserRowDetails />
-          <UserRowDetails />
-          <UserRowDetails />
+          {users.map((user) => (
+            <UserRowDetails
+              key={user.id}
+              organizationName={user.orgName}
+              fullName={user.profile.firstName + " " + user.profile.lastName}
+              emailAddress={user.email}
+              phoneNumber={user.phoneNumber.slice(7, -1)}
+              dateJoined={"20th"}
+              status={"active"}
+            />
+          ))}
         </>
       </div>
     </div>

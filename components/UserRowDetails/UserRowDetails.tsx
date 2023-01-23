@@ -9,7 +9,23 @@ import { useState } from "react";
 import style from "../../styles/components/UserRowDetails.module.scss";
 import { useHandleOutsideClick } from "../../hooks/handleOutsideClick";
 
-const UserRowDetails = () => {
+interface IUserRowDetails {
+  organizationName: string;
+  fullName: string;
+  emailAddress: string;
+  phoneNumber: string;
+  dateJoined: string;
+  status: string;
+}
+
+const UserRowDetails: React.FC<IUserRowDetails> = ({
+  organizationName,
+  fullName,
+  emailAddress,
+  phoneNumber,
+  dateJoined,
+  status,
+}) => {
   const [showDetails, setShowDetails] = useState(false);
   const closeMoreDetailsDropDown = () => {
     setShowDetails(false);
@@ -17,14 +33,24 @@ const UserRowDetails = () => {
   const ref = useHandleOutsideClick(closeMoreDetailsDropDown);
   return (
     <div className={style.row}>
-      <p>Lendsqr</p>
-      <p>Adedeji Kunle</p>
-      <p>adedeji@gmail.com</p>
-      <p>0810823222</p>
-      <p>May 15,2020 10:00 AM</p>
+      <p>{organizationName}</p>
+      <p>{fullName}</p>
+      <p>{emailAddress}</p>
+      <p>{phoneNumber}</p>
+      <p>{dateJoined}</p>
 
       <span>
-        <p className={style.blacklisted}>Inactive</p>
+        <p
+          className={
+            status === "active"
+              ? style.active
+              : status === "pending"
+              ? style.pending
+              : style.blacklisted
+          }
+        >
+          {status}
+        </p>
         <Image
           src={moreIcon}
           alt="more"
