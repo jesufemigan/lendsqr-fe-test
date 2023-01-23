@@ -1,15 +1,14 @@
 export const convertTime = (time: string) => {
   let date = new Date(time);
-  const options = {
+
+  return date.toLocaleString("en-US", {
     year: "numeric",
     month: "short",
     day: "numeric",
     hour: "numeric",
     minute: "numeric",
     hour12: true,
-  };
-
-  return date.toLocaleString("en-US", options);
+  });
 };
 
 export const checkStatus = (time: string) => {
