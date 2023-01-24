@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import backIcon from "../../public/assets/icons/goBack.svg";
 import ratedIcon from "../../public/assets/icons/rated.svg";
@@ -11,8 +11,6 @@ import style from "../../styles/pages/UserDetails.module.scss";
 import UserInfoCard from "../../components/UserInfoCard/UserInfoCard";
 import Link from "next/link";
 import { generateRandomCharacters } from "../../utils/idGenerator";
-
-import { loadUsers } from "utils/fetchUsers";
 
 const ShowUser = () => {
   const router = useRouter();
@@ -45,13 +43,6 @@ const ShowUser = () => {
       }
     }
     fetchUser();
-    // const data = localStorage.getItem("userDetails");
-
-    // if (data) {
-    //   setUserDetails(JSON.parse(data));
-    // } else {
-    //   fetchUserDetails(id);
-    // }
   }, [id]);
 
   function isEmptyObject(obj: any) {
@@ -61,7 +52,6 @@ const ShowUser = () => {
   if (isEmptyObject(userDetails)) {
     return <div>Loading...</div>;
   }
-  console.log(userDetails);
 
   const personalInformation = [
     {
