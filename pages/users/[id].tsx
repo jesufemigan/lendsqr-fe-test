@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import backIcon from "../../public/assets/icons/goBack.svg";
 import ratedIcon from "../../public/assets/icons/rated.svg";
@@ -12,34 +12,56 @@ import UserInfoCard from "../../components/UserInfoCard/UserInfoCard";
 import Link from "next/link";
 import { generateRandomCharacters } from "../../utils/idGenerator";
 
-const ShowUser = ({ userDetails }: { userDetails: any }) => {
-  // const router = useRouter();
-  // const { id } = router.query;
-  // const [userDetails, setUserDetails] = useState<{ [key: string]: any }>({});
+import { loadUsers } from "utils/fetchUsers";
 
-  // const fetchUserDetails = async () => {
-  //   const response = await fetch(
-  //     `https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users/${id}`
-  //   );
-  //   const data = response.json();
+const ShowUser = () => {
+  const router = useRouter();
+  const { id } = router.query;
+  const [userDetails, setUserDetails] = useState<{ [key: string]: any }>({});
 
-  //   localStorage.setItem("userDetails", JSON.stringify(data));
-  //   setUserDetails(data);
-  // };
+  const fetchUserDetails = async (unique: any) => {
+    const response = await fetch(
+      `https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users/${unique}`
+    );
+    const data = response.json();
 
-  // useEffect(() => {
-  //   const data = localStorage.getItem("userDetails");
+    localStorage.setItem("userDetails", JSON.stringify(data));
+    setUserDetails(data);
+  };
 
-  //   if (data) {
-  //     setUserDetails(JSON.parse(data));
-  //   } else {
-  //     fetchUserDetails();
-  //   }
-  // }, []);
+  useEffect(() => {
+    async function fetchUser() {
+      const userData = JSON.parse(localStorage.getItem(`user-${id}`) as string);
 
-  // function isEmptyObject(obj: any) {
-  //   return JSON.stringify(obj) === "{}";
-  // }
+      if (userData) {
+        setUserDetails(userData);
+      } else {
+        const res = await fetch(
+          `https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users/${id}`
+        );
+        const data = await res.json();
+        setUserDetails(data);
+        localStorage.setItem(`user-${id}`, JSON.stringify(data));
+      }
+    }
+    fetchUser();
+    // const data = localStorage.getItem("userDetails");
+
+    // if (data) {
+    //   setUserDetails(JSON.parse(data));
+    // } else {
+    //   fetchUserDetails(id);
+    // }
+  }, [id]);
+
+  function isEmptyObject(obj: any) {
+    return JSON.stringify(obj) === "{}";
+  }
+
+  if (isEmptyObject(userDetails)) {
+    return <div>Loading...</div>;
+  }
+  console.log(userDetails);
 
   const personalInformation = [
     {
@@ -205,104 +227,38 @@ const ShowUser = ({ userDetails }: { userDetails: any }) => {
   );
 };
 
-export const getStaticProps = async (context: any) => {
-  const res = await fetch(
-    `https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users/${context.params.id}`,
-    {
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "User-Agent": "*",
-      },
-    }
-  );
+// export const getStaticProps = async (context: any) => {
+//   // const res = await fetch(
+//   //   `https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users/${context.params.id}`
+//   // );
 
-  const userDetails = await res.json();
+//   const userDetails = await loadUsers(context.params.id);
 
-  return {
-    props: {
-      userDetails,
-      // userDetails: JSON.stringify(userDetails)
-    },
-  };
-};
+//   // console.log(typeof userDetails)
 
-export const getStaticPaths = async () => {
-  const res = await fetch(
-    `https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users`,
-    {
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "User-Agent": "*",
-      },
-    }
-  );
+//   return {
+//     props: {
+//       userDetails,
+//     },
+//   };
+// };
 
-  const users = await res.json();
+// export const getStaticPaths = async () => {
+//   // const res = await fetch(
+//   //   `https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users`
+//   // );
 
-  const ids = users.map((user: any) => user.id);
-  const notCorrectPaths = [
-    "100",
-    "35",
-    "41",
-    "42",
-    "44",
-    "45",
-    "47",
-    "51",
-    "55",
-    "58",
-    "60",
-    "61",
-    "68",
-    "69",
-    "72",
-    "73",
-    "74",
-    "75",
-    "77",
-    "78",
-    "79",
-    "80",
-    "82",
-    "83",
-    "84",
-    "85",
-    "86",
-    "87",
-    "88",
-    "89",
-    "90",
-    "91",
-    "92",
-    "93",
-    "95",
-    "94",
-    "96",
-    "97",
-    "98",
-    "99",
-    "34",
-    "37",
-    "40",
-    "48",
-    "54",
-    "59",
-    "62",
-    "63",
-    "65",
-    "70",
-    "81",
-  ];
-  const correctId = ids.filter((id: any) => {
-    return !notCorrectPaths.includes(id);
-  });
+//   // const users = await res.json();
+//   const users = Array.from({length: 100}, (_,i) => i+1)
 
-  const paths = correctId.map((id: any) => ({ params: { id } }));
+//   // const ids = users.map((user: any) => user.id);
 
-  return {
-    paths,
-    fallback: false,
-  };
-};
+//   const paths = users.map((id: any) => ({ params: { id: id.toString() } }));
+
+//   return {
+//     paths,
+//     fallback: 'blocking',
+//   };
+// };
 
 export default ShowUser;
