@@ -148,7 +148,7 @@ const ShowUser = ({ userDetails }: { userDetails: any }) => {
           <span className={style.userPhoto}>
             <div className={style.display}>
               <Image
-                src={userDetails.profile.avatar}
+                src={userDetails.profile.avatar.toString()}
                 alt="user"
                 width={50}
                 height={50}
@@ -207,7 +207,13 @@ const ShowUser = ({ userDetails }: { userDetails: any }) => {
 
 export const getStaticProps = async (context: any) => {
   const res = await fetch(
-    `https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users/${context.params.id}`
+    `https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users/${context.params.id}`,
+    {
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "User-Agent": "*",
+      },
+    }
   );
 
   const userDetails = await res.json();
@@ -215,20 +221,83 @@ export const getStaticProps = async (context: any) => {
   return {
     props: {
       userDetails,
+      // userDetails: JSON.stringify(userDetails)
     },
   };
 };
 
 export const getStaticPaths = async () => {
   const res = await fetch(
-    `https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users`
+    `https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users`,
+    {
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "User-Agent": "*",
+      },
+    }
   );
 
   const users = await res.json();
 
   const ids = users.map((user: any) => user.id);
+  const notCorrectPaths = [
+    "100",
+    "35",
+    "41",
+    "42",
+    "44",
+    "45",
+    "47",
+    "51",
+    "55",
+    "58",
+    "60",
+    "61",
+    "68",
+    "69",
+    "72",
+    "73",
+    "74",
+    "75",
+    "77",
+    "78",
+    "79",
+    "80",
+    "82",
+    "83",
+    "84",
+    "85",
+    "86",
+    "87",
+    "88",
+    "89",
+    "90",
+    "91",
+    "92",
+    "93",
+    "95",
+    "94",
+    "96",
+    "97",
+    "98",
+    "99",
+    "34",
+    "37",
+    "40",
+    "48",
+    "54",
+    "59",
+    "62",
+    "63",
+    "65",
+    "70",
+    "81",
+  ];
+  const correctId = ids.filter((id: any) => {
+    return !notCorrectPaths.includes(id);
+  });
 
-  const paths = ids.map((id: any) => ({ params: { id: id.toString() } }));
+  const paths = correctId.map((id: any) => ({ params: { id } }));
 
   return {
     paths,
