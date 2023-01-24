@@ -7,7 +7,7 @@ import UserRowDetails from "../UserRowDetails/UserRowDetails";
 
 import { convertTime, checkStatus } from "../../utils/dateTime";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 const UsersTable = ({ users }: { users: any[] }) => {
   const [showFilter, setShowFilter] = useState(false);

@@ -12,34 +12,34 @@ import UserInfoCard from "../../components/UserInfoCard/UserInfoCard";
 import Link from "next/link";
 import { generateRandomCharacters } from "../../utils/idGenerator";
 
-const ShowUser = () => {
-  const router = useRouter();
-  const { id } = router.query;
-  const [userDetails, setUserDetails] = useState<{ [key: string]: any }>({});
+const ShowUser = ({ userDetails }: { userDetails: any }) => {
+  // const router = useRouter();
+  // const { id } = router.query;
+  // const [userDetails, setUserDetails] = useState<{ [key: string]: any }>({});
 
-  const fetchUserDetails = async () => {
-    const response = await fetch(
-      `https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users/${id}`
-    );
-    const data = response.json();
+  // const fetchUserDetails = async () => {
+  //   const response = await fetch(
+  //     `https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users/${id}`
+  //   );
+  //   const data = response.json();
 
-    localStorage.setItem("userDetails", JSON.stringify(data));
-    setUserDetails(data);
-  };
+  //   localStorage.setItem("userDetails", JSON.stringify(data));
+  //   setUserDetails(data);
+  // };
 
-  useEffect(() => {
-    const data = localStorage.getItem("userDetails");
+  // useEffect(() => {
+  //   const data = localStorage.getItem("userDetails");
 
-    if (data) {
-      setUserDetails(JSON.parse(data));
-    } else {
-      fetchUserDetails();
-    }
-  }, []);
+  //   if (data) {
+  //     setUserDetails(JSON.parse(data));
+  //   } else {
+  //     fetchUserDetails();
+  //   }
+  // }, []);
 
-  function isEmptyObject(obj: any) {
-    return JSON.stringify(obj) === "{}";
-  }
+  // function isEmptyObject(obj: any) {
+  //   return JSON.stringify(obj) === "{}";
+  // }
 
   const personalInformation = [
     {
@@ -87,7 +87,7 @@ const ShowUser = () => {
     },
     {
       title: "Monthly Income",
-      info: `&#8358;${userDetails.education.monthlyIncome[1]} - &#8358;${userDetails.education.monthlyIncome[0]}`,
+      info: `${userDetails.education.monthlyIncome[1]} - ${userDetails.education.monthlyIncome[0]}`,
     },
     {
       title: "Loan Repayment",
@@ -126,10 +126,6 @@ const ShowUser = () => {
     },
   ];
 
-  if (!isEmptyObject(userDetails)) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div>
       <Link href={"/users"}>
@@ -151,7 +147,12 @@ const ShowUser = () => {
         <div className={style.userProfileSection}>
           <span className={style.userPhoto}>
             <div className={style.display}>
-              <Image src={userDetails.profile.avatar} alt="user" />
+              <Image
+                src={userDetails.profile.avatar}
+                alt="user"
+                width={50}
+                height={50}
+              />
             </div>
             <div className={style.name}>
               <h1>
@@ -203,4 +204,36 @@ const ShowUser = () => {
     </div>
   );
 };
+
+export const getStaticProps = async (context: any) => {
+  const res = await fetch(
+    `https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users/${context.params.id}`
+  );
+
+  const userDetails = await res.json();
+
+  return {
+    props: {
+      userDetails,
+    },
+  };
+};
+
+export const getStaticPaths = async () => {
+  const res = await fetch(
+    `https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users`
+  );
+
+  const users = await res.json();
+
+  const ids = users.map((user: any) => user.id);
+
+  const paths = ids.map((id: any) => ({ params: { id: id.toString() } }));
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
 export default ShowUser;

@@ -8,6 +8,7 @@ import style from "../../styles/components/DashboardLayout.module.scss";
 
 const workSans = Work_Sans({
   variable: "--workSans-font",
+  subsets: ["latin"],
 });
 
 interface IDashboardLoayout {

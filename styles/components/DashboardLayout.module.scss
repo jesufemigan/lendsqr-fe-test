@@ -5,7 +5,7 @@
   position: fixed;
   background-color: c.$primary-bg;
   width: calc(100% - u.em(283));
-  height: 100%;
+  height: calc(100% - u.em(100));
   z-index: -2;
   top: u.em(90);
   left: u.em(283);
@@ -19,5 +19,9 @@
     left: 0;
     padding: 0 u.em(30);
     width: 100%;
+  }
+
+  & > div {
+    padding-bottom: u.em(30);
   }
 }
