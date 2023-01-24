@@ -11,6 +11,9 @@
 # links
 
 - [Live Link](https://jesufemi-oladapo-lendsqr-fe-test.vercel.app/)
+ -[Login Page](https://jesufemi-oladapo-lendsqr-fe-test.vercel.app/login)
+ -[Users Page](https://jesufemi-oladapo-lendsqr-fe-test.vercel.app/users)
+ -To access the user Details page click on any of the listed user
 
 - [Github Link](https://github.com/jesufemigan/lendsqr-fe-test)
 
