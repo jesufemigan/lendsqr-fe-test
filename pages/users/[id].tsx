@@ -219,21 +219,21 @@ export const getStaticProps = async (context: any) => {
   };
 };
 
-export const getStaticPaths = async () => {
-  const res = await fetch(
-    `https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users`
-  );
+// export const getStaticPaths = async () => {
+//   const res = await fetch(
+//     `https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users`
+//   );
 
-  const users = await res.json();
+//   const users = await res.json();
 
-  const ids = users.map((user: any) => user.id);
+//   const ids = users.map((user: any) => user.id);
 
-  const paths = ids.map((id: any) => ({ params: { id: id.toString() } }));
+//   const paths = ids.map((id: any) => ({ params: { id: id.toString() } }));
 
-  return {
-    paths,
-    fallback: false,
-  };
-};
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// };
 
 export default ShowUser;
